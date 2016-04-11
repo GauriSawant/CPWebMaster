@@ -239,9 +239,9 @@ function configure_network() {
         async.each(arr, function (i, a_cb) {
             if (options.network.users[i] && options.network.users[i].secret && options.network.peers[0] && options.network.peers[1]) {											//make sure we still have a user for this network
 				
-				if(options.network.users[i].username == 'user_type0_b42b7b5834'){
+				if(options.network.users[i].username == 'user_type0_d515b27d27'){
 					ibc.register(0, options.network.users[i].username, options.network.users[i].secret, a_cb);
-				}else if(options.network.users[i].username == 'user_type1_bd1a8c2d4d'){
+				}else if(options.network.users[i].username == 'user_type0_14e37ee7b0'){
 					ibc.register(1, options.network.users[i].username, options.network.users[i].secret, a_cb);
 				}
                 
