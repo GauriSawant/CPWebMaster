@@ -237,18 +237,19 @@ function configure_network() {
             arr.push(i);															//build the list of indexes
         }
         async.each(arr, function (i, a_cb) {
-            if (options.network.users[i] && options.network.users[i].secret && options.network.peers[0] && options.network.peers[1]) {											//make sure we still have a user for this network
-				if(options.network.users[i].username.indexOf('type0') || options.network.users[i].username.indexOf('type1') || options.network.users[i].username.indexOf('type2')){
+            if (options.network.users[i] && options.network.users[i].secret && options.network.peers[0]) {											//make sure we still have a user for this network
+				if(options.network.users[i].username.indexOf('type0') >= 0 || options.network.users[i].username.indexOf('type1')  >= 0 || options.network.users[i].username.indexOf('type2')  >= 0){
 					ibc.register(0, options.network.users[i].username, options.network.users[i].secret, a_cb);					
-				}else{
-					ibc.register(1, options.network.users[i].username, options.network.users[i].secret, a_cb);
 				}
 				
-				/*if(options.network.users[i].username == 'user_type0_3a4b1fabd0' || options.network.users[i].username == 'user_type0_aeaddef7e4'){
-					ibc.register(0, options.network.users[i].username, options.network.users[i].secret, a_cb);
-				}else if(options.network.users[i].username == 'user_type1_98ec814523' || options.network.users[i].username == 'user_type1_98ec814523'){
-					ibc.register(1, options.network.users[i].username, options.network.users[i].secret, a_cb);
-				*/
+                
+            }
+			
+		async.each(arr, function (i, a_cb) {
+            if (options.network.users[i] && options.network.users[i].secret && options.network.peers[1]) {											//make sure we still have a user for this network
+				if(options.network.users[i].username.indexOf('type3') >= 0 || options.network.users[i].username.indexOf('type4')  >= 0){
+					ibc.register(1, options.network.users[i].username, options.network.users[i].secret, a_cb);					
+				}
 				
                 
             }

@@ -38,7 +38,7 @@ function login(id, secret, cb) {
     }
 
     // Just log in users against the first peer, as it is used for all rest calls anyway.
-	if(options.network.users[i].username.indexOf('type0') || options.network.users[i].username.indexOf('type1') || options.network.users[i].username.indexOf('type2')){
+	//if(options.network.users[i].username.indexOf('type0') >= 0 || options.network.users[i].username.indexOf('type1') >= 0 || options.network.users[i].username.indexOf('type2') >= 0){
     ibc.register(0, id, secret, function (err, data) {
         if (err) {
             console.log(TAG, "Error", JSON.stringify(err));
@@ -59,7 +59,7 @@ function login(id, secret, cb) {
             });
         }
     });
-	}else{
+	/*}else{
 		ibc.register(1, id, secret, function (err, data) {
         if (err) {
             console.log(TAG, "Error", JSON.stringify(err));
@@ -81,7 +81,7 @@ function login(id, secret, cb) {
         }
     });
 		
-	}
+	}*/
 }
 
 /**
