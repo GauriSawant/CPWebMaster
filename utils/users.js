@@ -38,7 +38,8 @@ function login(id, secret, cb) {
     }
 
     // Just log in users against the first peer, as it is used for all rest calls anyway.
-    ibc.register(1, id, secret, function (err, data) {
+	if(options.network.users[i].username.indexOf('type0') || options.network.users[i].username.indexOf('type1') || options.network.users[i].username.indexOf('type2')){
+    ibc.register(0, id, secret, function (err, data) {
         if (err) {
             console.log(TAG, "Error", JSON.stringify(err));
             cb && cb(err)
@@ -58,6 +59,29 @@ function login(id, secret, cb) {
             });
         }
     });
+	}else{
+		ibc.register(1, id, secret, function (err, data) {
+        if (err) {
+            console.log(TAG, "Error", JSON.stringify(err));
+            cb && cb(err)
+        } else {
+            console.log(TAG, "Data", JSON.stringify(data));
+
+            // Make sure an account exists for the user
+            console.log(TAG, "(Re)initializing user's trading account");
+            chaincode.createAccount([id], id, function (err) {
+                if (err) {
+                    console.error(TAG, "Account init error:", JSON.stringify(err));
+                }
+
+                console.log(TAG, "Initialized account:" + id);
+                cb && cb(null);
+
+            });
+        }
+    });
+		
+	}
 }
 
 /**
